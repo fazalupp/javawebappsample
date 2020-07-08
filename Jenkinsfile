@@ -12,9 +12,11 @@ node {
     checkout scm
   }
   
-  stage('build') {
-    sh 'mvn clean package'
-  }
+ stage('build') {
+        withMaven(maven: 'mvn') {
+            sh "mvn clean package"
+        }
+   }
   
   stage('deploy') {
     def resourceGroup = 'myResourceGroup8' 
